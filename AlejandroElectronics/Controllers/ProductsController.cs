@@ -10,7 +10,18 @@ namespace AlejandroElectronics.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            Models.ProductsViewModel model = new Models.ProductsViewModel();
+            model.Name = "Albert";
+            model.Price = 299.99m;
+            model.DietaryRequirements = "Grass, Hay, Carrots, Cap'n Crunch";
+            model.Description = "Albert is an absolutely perfect Alpaca";
+            model.Age = 4;
+            model.Temperment = "Pleasant";
+            model.ImageUrl = "/images/computer1.jpg";
+           
+
+
+            return View(model);
         }
     }
 }
