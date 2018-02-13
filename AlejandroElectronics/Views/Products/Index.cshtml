@@ -1,8 +1,10 @@
-﻿
+﻿@model AlejandroElectronics.Models.ProductsViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Hello World</h2>
+<h2>@Model.Name</h2>
+<div class="contianer">
+    <img src="@Model.ImageUrl" alt="@Model.ImageUrl" class="img-fluid" />
+</div>
 
-<img src="@Model.ImageUrl" alt="@Model.ImageUrl" class="img-fluid"/>
