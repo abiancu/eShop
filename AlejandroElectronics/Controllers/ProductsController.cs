@@ -49,5 +49,11 @@ namespace AlejandroElectronics.Controllers
             return View(model);
 
         }
+
+        public IActionResult Products()
+        {
+            
+            return View();
+        }
     }
 }

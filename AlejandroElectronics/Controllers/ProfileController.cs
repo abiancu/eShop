@@ -19,7 +19,10 @@ namespace AlejandroElectronics.Models
         [HttpPost]
         public IActionResult Index(ProfileViewModel model)
         {
-           return View();
+            ViewData["Title"] = "Welcome";
+            return this.RedirectToAction("Welcome", "Home");
         }
+
+        
     }
 }
