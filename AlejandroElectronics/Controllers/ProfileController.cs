@@ -17,12 +17,23 @@ namespace AlejandroElectronics.Models
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Index(ProfileViewModel model)
         {
-            ViewData["Title"] = "Welcome";
-            return this.RedirectToAction("Welcome", "Home");
+
+            if (ModelState.IsValid)
+            {
+                ViewData["Title"] = "Welcome";
+                return this.RedirectToAction("Welcome", "Home");
+            }
+
+            return View();
+
+           
         }
 
         
+
+
     }
 }
