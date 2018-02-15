@@ -40,20 +40,29 @@ namespace AlejandroElectronics.Controllers
                     ImageUrl = "/images/toshiba.jpg"
                 }
             };
-            if(Sku > 0)
+            if (Sku > 0)
             {
                 model.Products = model.Products.Where(x => x.Sku == Sku).ToArray();
             }
-            
-           
+
+
             return View(model);
 
         }
 
-        public IActionResult Products()
+        [HttpGet]
+        public IActionResult Index()
         {
-            
+            string productsName = "your alpaca";
+            Request.Cookies.TryGetValue("productID", out productsName);
+            ViewData["alpacaName"] = productsName;
+
             return View();
         }
+
+
+       
+
+
     }
 }

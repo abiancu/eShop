@@ -40,7 +40,7 @@
         </footer>
     </div>
 
-   <environment include="Development">
+    <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
@@ -61,6 +61,7 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
-    @RenderSection("Scripts", required: false)
-</body>
+    
+        @RenderSection("Scripts", required: false)
+    </body>
 </html>
