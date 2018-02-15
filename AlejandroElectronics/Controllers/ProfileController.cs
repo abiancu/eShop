@@ -26,8 +26,11 @@ namespace AlejandroElectronics.Models
                 ViewData["Title"] = "Welcome";
                 return this.RedirectToAction("Welcome", "Home");
             }
-
-            return View();
+            else
+            {
+                return View(model);
+            }
+            
 
            
         }

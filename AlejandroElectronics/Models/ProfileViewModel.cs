@@ -11,20 +11,29 @@ namespace AlejandroElectronics.Models
 {
     public class ProfileViewModel
     {
-       
-       public string name { get; set; }
-       public string password { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.Display(Name ="create an username")]
+        public string password { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
         public string username { get; set; }
 
+
+        [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "You need to enter an address")]
         public string address { get; set; }
+
+
 
         public string address2 { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
         public string city { get; set; }
-        public string state { get; set; }
+
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string states { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
         public int zip { get; set; }
 
 
