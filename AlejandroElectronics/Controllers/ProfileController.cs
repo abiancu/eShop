@@ -63,7 +63,7 @@ namespace AlejandroElectronics.Models
                     if (passwordResult.Succeeded)
                     {
                         _signInManager.SignInAsync(newUser, false).Wait();
-                        return RedirectToAction("Index", "Welcome");
+                        return RedirectToAction("Welcome", "Home");
                     }
                     else
                     {

@@ -24,14 +24,14 @@ namespace AlejandroElectronics.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Your contact page1.";
 
             return View();
         }
 
         public IActionResult Welcome()
         {
-            ViewData["Welcome"] = "Welcome to your account.";
+            ViewData["Message"] = "Welcome to your Account";
             return View();
         }
  
