@@ -53,9 +53,9 @@ namespace AlejandroElectronics.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            string productsName = "your alpaca";
-            Request.Cookies.TryGetValue("productID", out productsName);
-            ViewData["alpacaName"] = productsName;
+            string productsName = "yourvcomputer";
+            Request.Cookies.TryGetValue("Sku", out productsName);
+            ViewData["productName"] = productsName;
 
             return View();
         }
