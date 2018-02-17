@@ -84,6 +84,11 @@ namespace AlejandroElectronics.Models
             }
             return View();
         }
+        public IActionResult Logout()
+        {
+            _signInManager.SignOutAsync().Wait();
+            return RedirectToAction("Index", "Home");
+        }
     }
     
 }

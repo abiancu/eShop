@@ -28,12 +28,15 @@
                 <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
                 <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a></li>
                 <li class="nav-item"><a asp-area="" asp-controller="Products" asp-action="Index" class="nav-link">Products</a></li>
-                <li class="nav-item"><a asp-area="" asp-controller="Profile" asp-action="Index" class="nav-link">Profile</a></li>
+                <li class="nav-item"><a asp-area="" asp-controller="Profile" asp-action="Index" class="nav-link">Profile/Register</a></li>
+                <li class="nav-item"><a asp-area="" asp-controller="Login" asp-action="Index" class="nav-link">Login</a></li>
                 @if (User.Identity.IsAuthenticated)
                  {
                     <li class="nav-item"><a asp-area="" asp-controller="Profile" asp-action="Logout" class="nav-link">Logout as @User.Identity.Name</a></li>
                  }
-                 
+               
+
+
 
             </ul>
         </div>
