@@ -25,9 +25,13 @@ namespace AlejandroElectronics
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            services.AddSession();
             services.AddMvc();
-            services.AddDbContext<IdentityDbContext>(opt => opt.UseInMemoryDatabase("Identities"));
+            services.AddDbContext<IdentityDbContext>(opt =>
+            opt.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = AlejandroTest; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False",
+            sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName)));
+            //UseInMemoryDatabase("Identities"));
+
             services.AddAntiforgery(); //for security!
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityDbContext>()
