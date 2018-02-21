@@ -10,36 +10,65 @@ namespace AlejandroElectronics.Controllers
     {
 
 
-        public IActionResult Index(int Sku)
+        public IActionResult Index(int? Sku)
         {
             Models.ProductsViewModel model = new Models.ProductsViewModel();
-            model.Products = new Models.Product[]
+
+            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AlejandroTest;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            var connection = new System.Data.SqlClient.SqlConnection(connectionString);
+
+            connection.Open();
+            var command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Products";
+            var reader = command.ExecuteReader();
+            var nameColumn = reader.GetOrdinal("Name");
+            var priceColumn = reader.GetOrdinal("Price");
+            var descriptionColumn = reader.GetOrdinal("Description");
+            var imageUrlColumn = reader.GetOrdinal("ImageUrl");
+            var SKUColumn = reader.GetOrdinal("Sku");
+            List<Models.Product> products = new List<Models.Product>();
+            while (reader.Read())
             {
-                new Models.Product
+                products.Add(new Models.Product
                 {
-                    Name = "Mac Air",
-                    Price = 299.99m,
-                    Sku = 300,
-                        Description = "Pretty cool laptop",
-                        ImageUrl = "/images/computer1.jpg"
-                },
-                new Models.Product
-                {
-                     Name = "Surface",
-                    Price = 399.99m,
-                    Sku = 400,Description = "Pretty cool laptop",
-                    ImageUrl = "/images/surface.jpg"
+                    Name =  reader.IsDBNull(nameColumn) ?"": reader.GetString(nameColumn),
+                    Description = reader.IsDBNull(descriptionColumn) ? "" : reader.GetString(descriptionColumn),
+                    ImageUrl = reader.IsDBNull(imageUrlColumn) ? "" : reader.GetString(imageUrlColumn),
+                    Price =  reader.GetDecimal(priceColumn),
+                    Sku = reader.GetInt32(SKUColumn)
 
-                },
-                new Models.Product{
+                });
+            }
+            connection.Close();
+            model.Products = products.ToArray();
+            //model.Products = new Models.Product[]
+            //{
+            //    new Models.Product
+            //    {
+            //        Name = "Mac Air",
+            //        Price = 299.99m,
+            //        Sku = 300,
+            //            Description = "Pretty cool laptop",
+            //            ImageUrl = "/images/computer1.jpg"
+            //    },
+            //    new Models.Product
+            //    {
+            //         Name = "Surface",
+            //        Price = 399.99m,
+            //        Sku = 400,
+            //Description = "Pretty cool laptop",
+            //          ImageUrl = "/images/surface.jpg"
 
-                    Name = "Toshiba",
-                    Price = 899.99m,
-                    Sku = 500,
-                    Description = "It's Ok!",
-                    ImageUrl = "/images/toshiba.jpg"
-                }
-            };
+            //    },
+            //    new Models.Product{
+
+            //        Name = "Toshiba",
+            //        Price = 899.99m,
+            //        Sku = 500,
+            //        Description = "It's Ok!",
+            //        ImageUrl = "/images/toshiba.jpg"
+            //    }
+            //};
             if (Sku > 0)
             {
                 model.Products = model.Products.Where(x => x.Sku == Sku).ToArray();
@@ -50,14 +79,14 @@ namespace AlejandroElectronics.Controllers
 
         }
 
-        [HttpGet]
-        public IActionResult Index()
+        [HttpPost]
+        public IActionResult Index(int? Sku, bool extra)
         {
-            string productsName = "yourvcomputer";
-            Request.Cookies.TryGetValue("Sku", out productsName);
+            string productsName = Sku.HasValue ? Sku.Value.ToString() : "product name";
+           // Request.Cookies.TryGetValue("Sku", out productsName);
             ViewData["productName"] = productsName;
 
-            return View();
+            return RedirectToAction("Index", "Cart");
         }
 
 

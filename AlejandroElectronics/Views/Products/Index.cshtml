@@ -19,7 +19,7 @@
                 <dd>@product.Description</dd>
             </dl>
             <form asp-action="Index" asp-controller="Products" method="post">
-                <input type ="hidden" name="id" value="@Model.Products" />
+                <input type ="hidden" name="Sku" value="@product.Sku" />
                 <input type="submit" value="Buy it" class="btn btn-danger" />
             </form>
         </div>
