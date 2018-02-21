@@ -36,6 +36,10 @@ namespace AlejandroElectronics
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
+
+            //setting up connectioString
+            services.Configure<Models.ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
