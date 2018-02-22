@@ -25,7 +25,12 @@ namespace AlejandroElectronics.Controllers
             {
                 connection.Open();
                 var command = connection.CreateCommand();
-                command.CommandText = "SELECT * FROM Products";
+                command.CommandText = "sp_GetProduct";
+                if (Sku.HasValue)
+                {
+                    command.Parameters.AddWithValue("@id", Sku);
+                }
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 using (var reader = command.ExecuteReader())
                 {
                     var nameColumn = reader.GetOrdinal("Name");
