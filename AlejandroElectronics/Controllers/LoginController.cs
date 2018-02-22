@@ -26,7 +26,7 @@ namespace AlejandroElectronics.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Login(string username, string password)
+        public IActionResult Index(string username, string password)
         {
             if (ModelState.IsValid)
             {
