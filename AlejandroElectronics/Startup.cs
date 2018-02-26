@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-
+using AlejandroElectronics.Models;
 
 namespace AlejandroElectronics
 {
@@ -33,9 +33,9 @@ namespace AlejandroElectronics
             //UseInMemoryDatabase("Identities"));
 
             services.AddAntiforgery(); //for security!
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<IdentityDbContext>()
-                .AddDefaultTokenProviders();
+            services.AddIdentity<Models.ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<Models.AlejandroTestContext>()
+                .AddDefaultTokenProviders(); 
 
             //setting up connectioString
             services.Configure<Models.ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
@@ -43,12 +43,12 @@ namespace AlejandroElectronics
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, AlejandroTestContext context)
+         {
            
             if (env.IsDevelopment())
             {
-                //app.UseBrowserLink();
+                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
             else
@@ -65,6 +65,8 @@ namespace AlejandroElectronics
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            DbInitializer.Initialize(context);
         }
     }
 }

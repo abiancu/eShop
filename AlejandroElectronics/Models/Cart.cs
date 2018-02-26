@@ -7,10 +7,10 @@ namespace AlejandroElectronics.Models
     {
         public int Id { get; set; }
         public Guid CartId { get; set; }
-        public string AspNetUserId { get; set; }
+        public string UserId { get; set; }
         public int ProductId { get; set; }
 
-        public AspNetUsers AspNetUser { get; set; }
+        public ApplicationUser User { get; set; }
         public Products Product { get; set; }
     }
 }

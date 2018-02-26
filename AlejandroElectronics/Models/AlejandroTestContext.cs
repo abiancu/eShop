@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace AlejandroElectronics.Models
 {
-    public partial class AlejandroTestContext : DbContext
+    public partial class AlejandroTestContext : Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext<ApplicationUser>
     {
 
         public AlejandroTestContext(): base()
@@ -25,6 +25,9 @@ namespace AlejandroElectronics.Models
       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Address>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -45,7 +48,7 @@ namespace AlejandroElectronics.Models
             
             modelBuilder.Entity<Cart>(entity =>
             {
-                entity.Property(e => e.AspNetUserId)
+                entity.Property(e => e.UserId)
                     .HasColumnName("AspNetUserID")
                     .HasMaxLength(450);
 
@@ -53,9 +56,9 @@ namespace AlejandroElectronics.Models
 
                 entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
-                entity.HasOne(d => d.AspNetUser)
-                    .WithMany(p => p.Cart)
-                    .HasForeignKey(d => d.AspNetUserId)
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Carts)
+                    .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_Cart_AspNerUsers");
 
                 entity.HasOne(d => d.Product)
