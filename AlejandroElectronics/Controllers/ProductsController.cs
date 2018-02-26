@@ -10,91 +10,23 @@ namespace AlejandroElectronics.Controllers
 {
     public class ProductsController : Controller
     {
-        private ConnectionStrings _connectionStrings;
+        private AlejandroTestContext _context;
 
-        public ProductsController(IOptions<ConnectionStrings> connectionStrings)
+        public ProductsController(AlejandroTestContext context)
         {
-            _connectionStrings = connectionStrings.Value;
+            _context = context;
         }
-
         public IActionResult Index(int? Sku)
         {
-            Models.ProductsViewModel model = new Models.ProductsViewModel();
-            List<Models.Product> products = new List<Models.Product>();
-            using (var connection = new System.Data.SqlClient.SqlConnection(_connectionStrings.DefaultConnection)) // the "using" block is use to dispose of the objects after we are done with it to prevent memory leak. 
+            if (!Sku.HasValue)
             {
-                connection.Open();
-                var command = connection.CreateCommand();
-                command.CommandText = "sp_GetProduct";
-                if (Sku.HasValue)
-                {
-                    command.Parameters.AddWithValue("@id", Sku);
-                }
-                command.CommandType = System.Data.CommandType.StoredProcedure;
-                using (var reader = command.ExecuteReader())
-                {
-                    var nameColumn = reader.GetOrdinal("Name");
-                    var priceColumn = reader.GetOrdinal("Price");
-                    var descriptionColumn = reader.GetOrdinal("Description");
-                    var imageUrlColumn = reader.GetOrdinal("ImageUrl");
-                    var SKUColumn = reader.GetOrdinal("Sku");
-                    
-                    while (reader.Read())
-                    {
-                        products.Add(new Models.Product
-                        {
-                            Name = reader.IsDBNull(nameColumn) ? "" : reader.GetString(nameColumn),
-                            Description = reader.IsDBNull(descriptionColumn) ? "" : reader.GetString(descriptionColumn),
-                            ImageUrl = reader.IsDBNull(imageUrlColumn) ? "" : reader.GetString(imageUrlColumn),
-                            Price = reader.IsDBNull(priceColumn) ? 0m : reader.GetDecimal(priceColumn),
-                            Sku = reader.IsDBNull(SKUColumn) ? 0 : reader.GetInt32(SKUColumn)
-
-                        });
-                    }
-                    
-                }
-
-                connection.Close();
-
-
+                return View(_context.Products);
             }
-            model.Products = products.ToArray();
-
-            //model.Products = new Models.Product[]
-            //{
-            //    new Models.Product
-            //    {
-            //        Name = "Mac Air",
-            //        Price = 299.99m,
-            //        Sku = 300,
-            //            Description = "Pretty cool laptop",
-            //            ImageUrl = "/images/computer1.jpg"
-            //    },
-            //    new Models.Product
-            //    {
-            //         Name = "Surface",
-            //        Price = 399.99m,
-            //        Sku = 400,
-            //Description = "Pretty cool laptop",
-            //          ImageUrl = "/images/surface.jpg"
-
-            //    },
-            //    new Models.Product{
-
-            //        Name = "Toshiba",
-            //        Price = 899.99m,
-            //        Sku = 500,
-            //        Description = "It's Ok!",
-            //        ImageUrl = "/images/toshiba.jpg"
-            //    }
-            //};
-            if (Sku > 0)
-                {
-                    model.Products = model.Products.Where(x => x.Sku == Sku).ToArray();
-                }
-
+            else
+            {
+                return View(_context.Products.Where(x => x.Id == Sku.Value));
+            }
            
-            return View(model);
 
         }
 

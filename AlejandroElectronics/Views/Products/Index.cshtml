@@ -1,10 +1,10 @@
-﻿@model AlejandroElectronics.Models.ProductsViewModel
+﻿@model IEnumerable<AlejandroElectronics.Models.Products>
 @{
     ViewData["Title"] = "Index";
    
 
 }
-@foreach (var product in Model.Products)
+@foreach (var product in Model)
 {
     <h2>@product.Name</h2>
     <div class="row">
@@ -17,6 +17,7 @@
                 <dd>@product.Name</dd>
                 <dt>Description</dt>
                 <dd>@product.Description</dd>
+                <dd>@(product.Price.HasValue ? product.Price.Value.ToString("c") : "No Price")</dd>
             </dl>
             <form asp-action="Index" asp-controller="Products" method="post">
                 <input type ="hidden" name="Sku" value="@product.Sku" />

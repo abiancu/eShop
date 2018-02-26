@@ -27,8 +27,8 @@ namespace AlejandroElectronics
         {
             services.AddSession();
             services.AddMvc();
-            services.AddDbContext<IdentityDbContext>(opt =>
-            opt.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = AlejandroTest; Integrated Security = True; Connect Timeout = 30; Encrypt = False; TrustServerCertificate = True; ApplicationIntent = ReadWrite; MultiSubnetFailover = False",
+            services.AddDbContext<Models.AlejandroTestContext>(opt =>
+            opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
             sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName)));
             //UseInMemoryDatabase("Identities"));
 
