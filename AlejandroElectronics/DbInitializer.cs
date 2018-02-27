@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using AlejandroElectronics.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AlejandroElectronics
 {
@@ -8,7 +9,7 @@ namespace AlejandroElectronics
     {
         internal static void Initialize(AlejandroTestContext context)
         {
-            // tHIS IS TO KNOW IF THE DATABASE EXIST
+            // tHIS CREATES THE DATABASE
             context.Database.EnsureCreated();
 
 
@@ -25,6 +26,7 @@ namespace AlejandroElectronics
                     DateCreated = DateTime.Now
 
                 });
+                context.SaveChanges();
 
                 context.Products.Add(new Products
                 {
