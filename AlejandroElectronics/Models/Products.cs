@@ -9,6 +9,7 @@ namespace AlejandroElectronics.Models
         {
             Cart = new HashSet<Cart>();
             Orders = new HashSet<Orders>();
+            Reviews = new HashSet<Review>();
         }
 
         public int Id { get; set; }
@@ -21,5 +22,6 @@ namespace AlejandroElectronics.Models
 
         public ICollection<Cart> Cart { get; set; }
         public ICollection<Orders> Orders { get; set; }
+        public ICollection<Review> Reviews { get; set; }
     }
 }

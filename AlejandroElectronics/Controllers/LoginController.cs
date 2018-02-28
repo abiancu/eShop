@@ -18,8 +18,8 @@ namespace AlejandroElectronics.Controllers
             return View();
         }
 
-        private SignInManager<IdentityUser> _signInManager;  //inject sign in manager to able to read sing in info.
-        public LoginController(SignInManager<IdentityUser> signInManager)
+        private SignInManager<Models.ApplicationUser> _signInManager;  //inject sign in manager to able to read sing in info.
+        public LoginController(SignInManager<Models.ApplicationUser> signInManager)
         {
             this._signInManager = signInManager;
         }
@@ -30,7 +30,7 @@ namespace AlejandroElectronics.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityUser existingUser = _signInManager.UserManager.FindByNameAsync(username).Result;
+                Models.ApplicationUser existingUser = _signInManager.UserManager.FindByNameAsync(username).Result;
                 if (existingUser != null)
                 {
                     //I found a user - try validating their password

@@ -13,5 +13,17 @@ namespace AlejandroElectronics.Models
         public string FavoriteColor { get; set; }
 
         public ICollection<Cart> Carts { get; set; }
+
+        public ICollection<Review> Reviews { get; set; }
+
+        public ApplicationUser()
+        {
+            Reviews = new HashSet<Review>();
+        }
+
+        public ApplicationUser(string userName) : base(userName)
+        {
+        }
     }
+    
 }

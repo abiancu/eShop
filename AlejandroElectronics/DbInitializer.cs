@@ -7,10 +7,10 @@ namespace AlejandroElectronics
 {
     internal class DbInitializer
     {
-        internal static void Initialize(AlejandroTestContext context)
+        internal static void Initialize(AlejandroTestContext context) //-- this Initialize is coming from Startup.cs
         {
             // tHIS CREATES THE DATABASE
-            context.Database.EnsureCreated();
+            context.Database.Migrate();
 
 
             //IF IT DATABASE DOES NOT EXIST IT CREATES A TABLE WITH NEW VALUES 
@@ -83,7 +83,33 @@ namespace AlejandroElectronics
                     DateCreated = DateTime.Now
                 });
                 context.SaveChanges();
+
+                context.Products.Add(new Products
+                {
+                    Name = "NewComptTest",
+                    Price = 899.99m,
+                    Sku = 567,
+                    ImageUrl = "",
+                    Description = "These seem cool",
+                    DateCreated = DateTime.Now
+                });
+                context.SaveChanges();
+            } // end of Products IF statement
+            if (!context.Reviews.Any())
+            {
+                context.Reviews.Add(new Review
+                {
+                    Rating = 2,
+                    Body = "Cool, cool",
+                    IsApproved = true,
+                    Product = context.Products.First()
+
+                });
+                context.SaveChanges();
             }
+
         }
+
+
     }
 }

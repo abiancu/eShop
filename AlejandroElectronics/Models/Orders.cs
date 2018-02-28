@@ -9,6 +9,7 @@ namespace AlejandroElectronics.Models
         {
             Payments = new HashSet<Payments>();
             Shipping = new HashSet<Shipping>();
+            LineItems = new HashSet<LineItem>();
         }
 
         public int Id { get; set; }
@@ -17,5 +18,8 @@ namespace AlejandroElectronics.Models
         public Products Product { get; set; }
         public ICollection<Payments> Payments { get; set; }
         public ICollection<Shipping> Shipping { get; set; }
+
+        public ApplicationUser User { get; set; } // orders belong to users
+        public ICollection<LineItem> LineItems { get; set; }
     }
 }

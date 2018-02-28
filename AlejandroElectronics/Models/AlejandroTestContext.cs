@@ -21,6 +21,8 @@ namespace AlejandroElectronics.Models
         public virtual DbSet<Payments> Payments { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Shipping> Shipping { get; set; }
+        public virtual DbSet<Review> Reviews { get; set; }
+        public virtual DbSet<LineItem> LineItems { get; set; }
 
       
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,6 +30,8 @@ namespace AlejandroElectronics.Models
 
             base.OnModelCreating(modelBuilder);
 
+
+            //this is called Fluent API to controll migrations. This is what is going into the database.
             modelBuilder.Entity<Address>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -129,6 +133,8 @@ namespace AlejandroElectronics.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Shipping_OrdersId");
             });
+
+            
         }
     }
 }

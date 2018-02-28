@@ -184,6 +184,30 @@ namespace AlejandroElectronics.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("AlejandroElectronics.Models.Review", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body");
+
+                    b.Property<bool>("IsApproved");
+
+                    b.Property<int?>("ProductId");
+
+                    b.Property<int>("Rating");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("AlejandroElectronics.Models.Shipping", b =>
                 {
                     b.Property<int>("Id");
@@ -336,6 +360,17 @@ namespace AlejandroElectronics.Migrations
                         .WithMany("Payments")
                         .HasForeignKey("OrdersId")
                         .HasConstraintName("FK_Payments_OrdersId");
+                });
+
+            modelBuilder.Entity("AlejandroElectronics.Models.Review", b =>
+                {
+                    b.HasOne("AlejandroElectronics.Models.Products", "Product")
+                        .WithMany("Reviews")
+                        .HasForeignKey("ProductId");
+
+                    b.HasOne("AlejandroElectronics.Models.ApplicationUser", "User")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("AlejandroElectronics.Models.Shipping", b =>

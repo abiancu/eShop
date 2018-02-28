@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
+
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace AlejandroElectronics.Models
@@ -37,9 +38,9 @@ namespace AlejandroElectronics.Models
 
         }
 
-        private SignInManager<IdentityUser> _signInManager;
+        private SignInManager<ApplicationUser> _signInManager;
 
-        public ProfileController(SignInManager<IdentityUser> signInManager)
+        public ProfileController(SignInManager<ApplicationUser> signInManager)
         {
             this._signInManager = signInManager;
         }
@@ -55,7 +56,7 @@ namespace AlejandroElectronics.Models
         {
             if (ModelState.IsValid)
             {
-                IdentityUser newUser = new IdentityUser(username);
+                ApplicationUser newUser = new ApplicationUser(username);
                 var userResult = _signInManager.UserManager.CreateAsync(newUser).Result;
                 if (userResult.Succeeded)
                 {
