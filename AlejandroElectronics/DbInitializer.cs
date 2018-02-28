@@ -107,6 +107,18 @@ namespace AlejandroElectronics
                 });
                 context.SaveChanges();
             }
+            if (!context.Reviews.Any())
+            {
+                context.Reviews.Add(new Review
+                {
+                    Rating = 5,
+                    Body = "i really like this computer. It's awesome",
+                    IsApproved = true,
+                    Product = context.Products.First()
+
+                });
+                context.SaveChanges();
+            }
 
         }
 

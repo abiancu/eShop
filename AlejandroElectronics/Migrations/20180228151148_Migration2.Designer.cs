@@ -11,9 +11,10 @@ using System;
 namespace AlejandroElectronics.Migrations
 {
     [DbContext(typeof(AlejandroTestContext))]
-    partial class AlejandroTestContextModelSnapshot : ModelSnapshot
+    [Migration("20180228151148_Migration2")]
+    partial class Migration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

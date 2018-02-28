@@ -288,7 +288,8 @@ namespace AlejandroElectronics.Migrations
                 {
                     Id = table.Column<int>(nullable: false),
                     AddressId = table.Column<int>(nullable: false),
-                    OrdersId = table.Column<int>(nullable: false)
+                    OrdersId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: true) // added this line of code to run the newly created scafollding shipping controller. 
                 },
                 constraints: table =>
                 {
