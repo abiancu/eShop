@@ -12,6 +12,8 @@ namespace AlejandroElectronics.Controllers
     public class CartController : Controller
     {
         private readonly AlejandroTestContext _context;
+        private string cartId;
+        private Guid cartGuid;
 
         public CartController(AlejandroTestContext context)
         {
@@ -26,37 +28,56 @@ namespace AlejandroElectronics.Controllers
             return View(await alejandroTestContext.ToListAsync());
         }
 
-       
+        [HttpPost]
+        public IActionResult Index(int? id)
+        {
+            if(Request.Cookies.TryGetValue("cartId", out cartId) && Guid.TryParse(cartId, out cartGuid) && _context.Cart.Any(x => x.UserId == cartId))
+            {
+                Cart c = null;
+                c.Product = _context.Products.First(x => x.Id == id);
+            }
+           
+            _context.SaveChanges();
 
-        //// GET: Cart/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+            return RedirectToAction("Index", "Shipping");
 
-        //    var cart = await _context.Cart
-        //        .Include(c => c.Product)
-        //        .Include(c => c.User)
-        //        .Include(c => c.Product.Price)
-        //        .SingleOrDefaultAsync(m => m.Id == id);
-        //    if (cart == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    return View(cart);
-        //}
 
-      
-        //// POST: Cart/Create
-       
-        
 
-        //// POST: Cart/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        }
+
+
+        // GET: Cart/Details/5
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var cart = await _context.Cart
+                .Include(c => c.Product)
+                .Include(c => c.User)
+                .Include(c => c.Product.Price)
+                .SingleOrDefaultAsync(m => m.Id == id);
+            if (cart == null)
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction("Index", "Shipping");
+        }
+
+
+        // POST: Cart/Create
+
+
+
+        // POST: Cart/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
         //public async Task<IActionResult> Edit(int id, [Bind("Id,CartId,UserId,ProductId")] Cart cart)
