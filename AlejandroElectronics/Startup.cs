@@ -27,18 +27,18 @@ namespace AlejandroElectronics
         {
             services.AddSession();
             services.AddMvc();
-            services.AddDbContext<Models.AlejandroTestContext>(opt =>
+            services.AddDbContext<AlejandroTestContext>(opt =>
             opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
             sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName)));
             //UseInMemoryDatabase("Identities"));
 
             services.AddAntiforgery(); //for security!
-            services.AddIdentity<Models.ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<Models.AlejandroTestContext>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<AlejandroTestContext>()
                 .AddDefaultTokenProviders(); 
 
             //setting up connectioString
-            services.Configure<Models.ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
+            services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
 
         }
 
