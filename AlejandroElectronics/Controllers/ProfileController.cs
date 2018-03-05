@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SendGrid;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -39,10 +40,12 @@ namespace AlejandroElectronics.Models
         }
 
         private SignInManager<ApplicationUser> _signInManager;
+        private SendGridClient _sendGridClient;
 
-        public ProfileController(SignInManager<ApplicationUser> signInManager)
+        public ProfileController(SignInManager<ApplicationUser> signInManager, SendGrid.SendGridClient sendGridClient)
         {
             this._signInManager = signInManager;
+            this._sendGridClient = sendGridClient;
         }
 
         public IActionResult Register()
@@ -52,7 +55,7 @@ namespace AlejandroElectronics.Models
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register(string username, string password)
+        public IActionResult Register(string username, string password)  // add Task<IActionResult> and add mark code await where there is .Result and .wait();
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +66,15 @@ namespace AlejandroElectronics.Models
                     var passwordResult = _signInManager.UserManager.AddPasswordAsync(newUser, password).Result;
                     if (passwordResult.Succeeded)
                     {
+                        //TODO: Send a user a message thanking them for creating an account; 
+                        SendGrid.SendGridClient sendGridClient = new SendGrid.SendGridClient("api_key");
+                        SendGrid.Helpers.Mail.SendGridMessage message = new SendGrid.Helpers.Mail.SendGridMessage();
+                        message.AddTo(username);
+                        message.Subject = "Welcome to Alpaca Store";
+                        message.SetFrom("alpacaadmin@codingtemple.com");
+                        message.AddContent("text/plain", "Thanks for registering as " + username + " on CompiFuture!");
+                        await sendGridClient.SendEmailAsync(message);
+
                         _signInManager.SignInAsync(newUser, false).Wait();
                         return RedirectToAction("Welcome", "Home");
                     }

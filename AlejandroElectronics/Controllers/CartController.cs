@@ -31,18 +31,15 @@ namespace AlejandroElectronics.Controllers
         [HttpPost]
         public IActionResult Index(int? id)
         {
-            if(Request.Cookies.TryGetValue("cartId", out cartId) && Guid.TryParse(cartId, out cartGuid) && _context.Cart.Any(x => x.UserId == cartId))
-            {
-                Cart c = null;
-                c.Product = _context.Products.First(x => x.Id == id);
-            }
+            //CODE TO CREATE THE COOKIE
+            
+
            
-            _context.SaveChanges();
 
+
+            //CODE TO READ THE COOKIE
+           
             return RedirectToAction("Index", "Shipping");
-
-
-
 
 
         }
