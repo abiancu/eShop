@@ -56,7 +56,7 @@ namespace AlejandroElectronics.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(ShippingsViewModel model, string CreditCardNumber, string CreditCardName, string ExpirationYear, string ExpirationMonth, string CreditCardVerificationValue) // this Model info needs to go to braintree.
+        public async Task<IActionResult> Index(ShippingsViewModel model) // this Model info needs to go to braintree.
         {
             
             if (Request.Cookies.Keys.Contains("cartId") && Guid.TryParse(Request.Cookies["cartId"], out Guid cartId))
@@ -93,8 +93,8 @@ namespace AlejandroElectronics.Controllers
                         CVV = model.CreditCardVerificationValue,
                         ExpirationMonth = model.ExpirationMonth,
                         ExpirationYear = model.ExpirationYear,
-                        Number = model.CreditCardNumber,
-
+                        Number = model.CreditCardNumber
+                        
                     };
 
                     // awaiting the result of card validation
@@ -104,21 +104,21 @@ namespace AlejandroElectronics.Controllers
                         _context.Orders.Add(newOrder); // => this adds the newly created order.
                         _context.Cart.Remove(model.Cart); // => once it's added, Remove() will clear out the cart.
                         Response.Cookies.Delete("cartId");// => Delete() will delete the cookie with the cart info.
-                        await _context.SaveChangesAsync();
+                        //await _context.SaveChangesAsync(); => Question for joe: Why did I not have to use await_context.SaveChanges()?
                         return RedirectToAction("Index", "OrderComplete");
-
+                       
                     }
                     foreach (var error in result.Errors.All())
                     {
                         ModelState.AddModelError(error.Code.ToString(), error.Message);
                     }
                 }
+                
 
-               
                 //return RedirectToAction("Index", "OrderComplete");
             }
+            await _context.SaveChangesAsync();
 
-            
             return View(model);
         }
     }
