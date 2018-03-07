@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SendGrid;
@@ -55,11 +56,12 @@ namespace AlejandroElectronics.Models
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register(string username, string password)  // add Task<IActionResult> and add mark code await where there is .Result and .wait();
+        public IActionResult Register(string username, string password, string email)  // add Task<IActionResult> and add mark code await where there is .Result and .wait();
         {
             if (ModelState.IsValid)
             {
                 ApplicationUser newUser = new ApplicationUser(username);
+                newUser.Email = email;
                 var userResult = _signInManager.UserManager.CreateAsync(newUser).Result;
                 if (userResult.Succeeded)
                 {
@@ -67,15 +69,15 @@ namespace AlejandroElectronics.Models
                     if (passwordResult.Succeeded)
                     {
                         //TODO: Send a user a message thanking them for creating an account; 
-                        SendGrid.SendGridClient sendGridClient = new SendGrid.SendGridClient("api_key");
-                        SendGrid.Helpers.Mail.SendGridMessage message = new SendGrid.Helpers.Mail.SendGridMessage();
-                        message.AddTo(username);
-                        message.Subject = "Welcome to Alpaca Store";
-                        message.SetFrom("alpacaadmin@codingtemple.com");
-                        message.AddContent("text/plain", "Thanks for registering as " + username + " on CompiFuture!");
-                        await sendGridClient.SendEmailAsync(message);
 
-                        _signInManager.SignInAsync(newUser, false).Wait();
+                        SendGrid.Helpers.Mail.SendGridMessage message = new SendGrid.Helpers.Mail.SendGridMessage();
+                        message.AddTo(email);
+                        message.Subject = "Welcome to CompiFuture Electronics";
+                        message.SetFrom("AlejandroElectronics@compifuture.com");
+                        message.AddContent("text/plain", "Thank you for registering  " + username + " on CompiFuture!");
+                        _sendGridClient.SendEmailAsync(message);
+
+                        _signInManager.SignInAsync(newUser, false).Wait(); // changed the register method to: RegisterAsync
                         return RedirectToAction("Welcome", "Home");
                     }
                     else
@@ -102,6 +104,7 @@ namespace AlejandroElectronics.Models
             _signInManager.SignOutAsync().Wait();
             return RedirectToAction("Index", "Home");
         }
+
+        
     }
-    
 }

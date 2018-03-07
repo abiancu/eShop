@@ -7,7 +7,7 @@
 
 <div asp-validation-summary="All"></div>
 <form method="post" asp-action="Index" asp-controller="Login">
-    
+
     <div class="row">
         <div class="col">
             <input class="form-control" type="text" name="username" placeholder="Enter username" />
@@ -19,8 +19,7 @@
     </div>
     <br />
 
-    <span>
-        <button type="submit" class="btn btn-primary">Sign in</button>
-       <a href="">Forgot Password or Username?</a>
-    </span>
+    <button type="submit" class="btn btn-primary">Sign in</button>
 </form>
+<a asp-action="ForgotPassword">Forgot Password or Username?</a>
+    

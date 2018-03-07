@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AlejandroElectronics.Models.Cart>
+﻿@model AlejandroElectronics.Models.Cart
 
 @{
     ViewData["Title"] = "Index";
@@ -23,17 +23,17 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Name)
+                @Model.Product.Name
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.ImageUrl)
+                @Model.Product.ImageUrl
             </td>
             
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Price)
+                @Model.Product.Price
             </td>
             <td>
                 @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -43,9 +43,8 @@
             @*GET A BUTTON TO GO TO SHIPPINGS *@
 
             <a asp-action="Index" asp-controller="Shippings" method="post">Order</a>
-           
+          
             </td>
         </tr>
-}
     </tbody>
 </table>
