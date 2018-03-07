@@ -17,11 +17,14 @@ namespace AlejandroElectronics.Controllers
        
         private Braintree.BraintreeGateway _braintreeGateway; // => injecting braintree
 
-        public ShippingsController(AlejandroTestContext context, Braintree.BraintreeGateway braintreeGateway)
+        private SmartyStreets.USStreetApi.Client _usStreetClient; // => injecting SmartyStreets
+
+        public ShippingsController(AlejandroTestContext context, Braintree.BraintreeGateway braintreeGateway, SmartyStreets.USStreetApi.Client usStreetClient)
         {
             _context = context;
-
             _braintreeGateway = braintreeGateway;
+            _usStreetClient = usStreetClient;
+
         }
         
         
