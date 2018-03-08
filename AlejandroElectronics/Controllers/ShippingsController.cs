@@ -80,10 +80,10 @@ namespace AlejandroElectronics.Controllers
                 {
                     Address = new Address
                     {
-                        Street = "",
-                        City = "",
-                        State = "",
-                        Zip = 0
+                        Street = address.Street,
+                        City = address.City,
+                        State = address.State,
+                        Zip = address.Zip
                     }
                 });
                 if (ModelState.IsValid)

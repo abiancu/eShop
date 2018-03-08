@@ -9,6 +9,7 @@ namespace AlejandroElectronics.Models
     public class ShippingsViewModel
     {
         public Cart Cart { get; set; }
+        public Address address { get; set; }
 
         [CreditCard]
         [Required]
