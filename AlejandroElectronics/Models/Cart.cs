@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AlejandroElectronics.Models
 {
@@ -11,6 +12,10 @@ namespace AlejandroElectronics.Models
         public int ProductId { get; set; }
 
         public ApplicationUser User { get; set; }
+
+        [DataType(DataType.Currency)]
         public Products Product { get; set; }
+        
+        
     }
 }

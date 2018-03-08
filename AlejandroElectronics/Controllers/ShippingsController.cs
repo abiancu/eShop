@@ -14,7 +14,7 @@ namespace AlejandroElectronics.Controllers
     public class ShippingsController : Controller
     {
         private readonly AlejandroTestContext _context;
-       
+
         private Braintree.BraintreeGateway _braintreeGateway; // => injecting braintree
 
         private SmartyStreets.USStreetApi.Client _usStreetClient; // => injecting SmartyStreets
@@ -26,25 +26,25 @@ namespace AlejandroElectronics.Controllers
             _usStreetClient = usStreetClient;
 
         }
-        
-        
+
+
         /// <summary>
         /// this index method displays the cart information once its orders from the cart view.
         /// </summary>
         /// <returns>
         /// </returns>
-       
+
 
         // GET: Shippings
         public async Task<IActionResult> Index()
         {
-            
+
             ShippingsViewModel viewModel = new ShippingsViewModel();
             if (Request.Cookies.Keys.Contains("cartId") && Guid.TryParse(Request.Cookies["cartId"], out Guid cartId))
             {
                 viewModel.Cart = await _context.Cart.Include(c => c.Product).Include(c => c.User).SingleAsync(x => x.CartId == cartId);
             }
-            
+
             return View(viewModel);
         }
 
@@ -56,7 +56,7 @@ namespace AlejandroElectronics.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
 
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(ShippingsViewModel model) // this Model info needs to go to braintree.
@@ -99,7 +99,7 @@ namespace AlejandroElectronics.Controllers
                         ExpirationMonth = model.ExpirationMonth,
                         ExpirationYear = model.ExpirationYear,
                         Number = model.CreditCardNumber
-                        
+
                     };
 
                     // awaiting the result of card validation
@@ -111,14 +111,14 @@ namespace AlejandroElectronics.Controllers
                         Response.Cookies.Delete("cartId");// => Delete() will delete the cookie with the cart info.
                         //await _context.SaveChangesAsync(); => Question for joe: Why did I not have to use await_context.SaveChanges()?
                         return RedirectToAction("Index", "OrderComplete");
-                       
+
                     }
                     foreach (var error in result.Errors.All())
                     {
                         ModelState.AddModelError(error.Code.ToString(), error.Message);
                     }
                 }
-                
+
 
                 //return RedirectToAction("Index", "OrderComplete");
             }

@@ -10,6 +10,7 @@ namespace AlejandroElectronics.Models
     {
         public Cart Cart { get; set; }
         public Address address { get; set; }
+       
 
         [CreditCard]
         [Required]
