@@ -61,7 +61,7 @@ namespace AlejandroElectronics.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(ShippingsViewModel model) // this Model info needs to go to braintree.
         {
-            
+            Address address = new Address();
             if (Request.Cookies.Keys.Contains("cartId") && Guid.TryParse(Request.Cookies["cartId"], out Guid cartId))
             {
                 model.Cart = await _context.Cart.Include(c => c.Product).Include(c => c.User).SingleAsync(x => x.CartId == cartId);
@@ -80,14 +80,16 @@ namespace AlejandroElectronics.Controllers
                 {
                     Address = new Address
                     {
-                        City = "Wheaton",
-                        State = "IL"
+                        Street = "",
+                        City = "",
+                        State = "",
+                        Zip = 0
                     }
                 });
                 if (ModelState.IsValid)
                 {
 
-
+                    // this is to interact with Braintree. Getting all the user card information and sending it to BrainTree.
                     Braintree.TransactionRequest saleRequest = new Braintree.TransactionRequest();
                     saleRequest.Amount = model.Cart.Product.Price.Value;
                     saleRequest.CreditCard = new Braintree.TransactionCreditCardRequest

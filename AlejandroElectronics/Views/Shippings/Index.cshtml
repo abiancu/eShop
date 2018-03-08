@@ -1,12 +1,13 @@
 ﻿@model AlejandroElectronics.Models.ShippingsViewModel
 
+
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>Shipping</h2>
+<h2>Orders &amp; Payments</h2><br/><br/>
 
-
+<h3>Order</h3>
 <table class="table">
     <thead>
         <tr>
@@ -19,67 +20,102 @@
             <th></th>
         </tr>
     </thead>
-    <tbody> 
+    <tbody>
         <tr>
-                <td>
-                    @Model.Cart.Product.Name
-                </td>
-                <td>
-                    @Model.Cart.Product.Price
-                </td>
-            </tr>
+            <td>
+                @Model.Cart.Product.Name
+            </td>
+            <td>
+                @Model.Cart.Product.Price
+            </td>
+        </tr>
 
     </tbody>
 </table>
+
 <br />
 <br />
 <form method="post">
-    <h4>Enter Card Information</h4>
-    <div class="form-group">
-        <label asp-for="CreditCardNumber"></label>
-        <input asp-for="CreditCardNumber" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label asp-for="CreditCartName"></label>
-        <input asp-for="CreditCartName" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label asp-for="CreditCardVerificationValue"></label>
-        <input asp-for="CreditCardVerificationValue" class="form-control" required />
-    </div>
-    <div class="form-group">
-        <label asp-for="ExpirationMonth"></label>
-        <div class="form-row">
+    <div class="row">
+        <div class="col-4">
+           
+                <h4>Enter Card Information</h4>
+                <div class="form-group">
+                    <label asp-for="CreditCardNumber"></label>
+                    <input asp-for="CreditCardNumber" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreditCartName"></label>
+                    <input asp-for="CreditCartName" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreditCardVerificationValue"></label>
+                    <input asp-for="CreditCardVerificationValue" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ExpirationMonth"></label>
+                    <div class="form-row">
 
-            <div class="col">
-                <select asp-for="ExpirationMonth" class="form-control" required>
-                    <option value="01">01</option>
-                    <option value="02">02</option>
-                    <option value="03">03</option>
-                    <option value="04">04</option>
-                    <option value="05">05</option>
-                    <option value="06">06</option>
-                    <option value="07">07</option>
-                    <option value="08">08</option>
-                    <option value="09">09</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="01">01</option>
-                </select>
+                        <div class="col">
+                            <select asp-for="ExpirationMonth" class="form-control" required>
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="01">01</option>
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select asp-for="ExpirationYear" class="form-control" required>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+        </div>
+           
+
+
+
+        <br />
+        <h3>Shipping</h3>
+        <div class="col-4">
+
+            <div class="form-group">
+                <label for="inputStreet">Street</label>
+                <input type="text" class="form-control" id="inputStreet" />
             </div>
-            <div class="col">
-                <select asp-for="ExpirationYear" class="form-control" required>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                </select>
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="inputCity" />
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="inputSate">State</label>
+                    <input type="text" class="form-control" id="inputSate" />
+                </div>
+                <div class="form-group col-sm-4">
+                    <label for="inputZip">Zip</label>
+                    <input class="form-control" id="inputZip" />
+                </div>
             </div>
+
+            <input type="submit" value="place order" class="btn btn-success" />
+
         </div>
     </div>
-    <input type="submit" value="place order" />
-</form>
+</form> 
 
 @*///////////////////////////////////////////////////////////////////////////////////////////////////*@
 @section Scripts{
