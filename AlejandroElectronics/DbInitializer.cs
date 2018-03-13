@@ -86,11 +86,31 @@ namespace AlejandroElectronics
 
                 context.Products.Add(new Products
                 {
-                    Name = "NewComptTest",
-                    Price = 899.99m,
-                    Sku = 567,
+                    Name = "Mac Desktop",
+                    Price = 1004.45m,
+                    Sku = 1000,
+                    ImageUrl = "/images/MacDesktop.jpg",
+                    Description = "Perfect tool to work at home",
+                    DateCreated = DateTime.Now
+                });
+
+                context.Products.Add(new Products
+                {
+                    Name = "Mac Pro Desktop",
+                    Price = 1300.76m,
+                    Sku = 1002,
                     ImageUrl = "",
-                    Description = "These seem cool",
+                    Description = "No chords, no mess. This machine will do it all.",
+                    DateCreated = DateTime.Now
+                });
+
+                context.Products.Add(new Products
+                {
+                    Name = "Oldy",
+                    Price = 1.00m,
+                    Sku = 001,
+                    ImageUrl = "/images/BackInTheDays.jpg",
+                    Description = "developers back in the days",
                     DateCreated = DateTime.Now
                 });
                 context.SaveChanges();
