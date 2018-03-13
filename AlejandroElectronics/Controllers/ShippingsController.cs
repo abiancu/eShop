@@ -61,7 +61,6 @@ namespace AlejandroElectronics.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Index(ShippingsViewModel model) // this Model info needs to go to braintree.
         {
-            Address address = new Address();
             if (Request.Cookies.Keys.Contains("cartId") && Guid.TryParse(Request.Cookies["cartId"], out Guid cartId))
             {
                 model.Cart = await _context.Cart.Include(c => c.Product).Include(c => c.User).SingleAsync(x => x.CartId == cartId);
@@ -80,10 +79,10 @@ namespace AlejandroElectronics.Controllers
                 {
                     Address = new Address
                     {
-                        Street = address.Street,
-                        City = address.City,
-                        State = address.State,
-                        Zip = address.Zip
+                        Street = model.address.Street,
+                        City = model.address.City,
+                        State = model.address.State,
+                        Zip = model.address.Zip
                     }
                 });
                 if (ModelState.IsValid)
@@ -109,8 +108,8 @@ namespace AlejandroElectronics.Controllers
                         _context.Orders.Add(newOrder); // => this adds the newly created order.
                         _context.Cart.Remove(model.Cart); // => once it's added, Remove() will clear out the cart.
                         Response.Cookies.Delete("cartId");// => Delete() will delete the cookie with the cart info.
-                        //await _context.SaveChangesAsync(); => Question for joe: Why did I not have to use await_context.SaveChanges()?
-                        return RedirectToAction("Index", "OrderComplete");
+                        await _context.SaveChangesAsync(); //=> Question for joe: Why did I not have to use await_context.SaveChanges()?
+                        return RedirectToAction("Index", "OrderComplete", new { ID = newOrder.Id });
 
                     }
                     foreach (var error in result.Errors.All())

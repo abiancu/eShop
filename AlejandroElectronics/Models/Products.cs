@@ -19,6 +19,7 @@ namespace AlejandroElectronics.Models
         
         [DataType(DataType.Currency)]
         public decimal? Price { get; set; }
+
         public string ImageUrl { get; set; }
         public int? Sku { get; set; }
         public DateTime? DateCreated { get; set; }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AlejandroElectronics.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,8 @@ namespace AlejandroElectronics.Migrations
                 name: "Address",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     City = table.Column<string>(unicode: false, maxLength: 450, nullable: true),
                     State = table.Column<string>(unicode: false, maxLength: 2, nullable: true),
                     Street = table.Column<string>(unicode: false, maxLength: 450, nullable: true),
@@ -221,8 +222,10 @@ namespace AlejandroElectronics.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
-                    ProductID = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ProductID = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -232,6 +235,12 @@ namespace AlejandroElectronics.Migrations
                         column: x => x.ProductID,
                         principalTable: "Products",
                         principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Orders_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -265,10 +274,38 @@ namespace AlejandroElectronics.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LineItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    OrderId = table.Column<int>(nullable: true),
+                    ProductId = table.Column<int>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LineItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LineItems_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_LineItems_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Payments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     OrdersID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -286,9 +323,10 @@ namespace AlejandroElectronics.Migrations
                 name: "Shipping",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AddressId = table.Column<int>(nullable: false),
-                    OrdersId = table.Column<int>(nullable: false),
+                    OrdersId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -357,9 +395,24 @@ namespace AlejandroElectronics.Migrations
                 column: "AspNetUserID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LineItems_OrderId",
+                table: "LineItems",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LineItems_ProductId",
+                table: "LineItems",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_ProductID",
                 table: "Orders",
                 column: "ProductID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_UserId",
+                table: "Orders",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_OrdersID",
@@ -408,6 +461,9 @@ namespace AlejandroElectronics.Migrations
                 name: "Cart");
 
             migrationBuilder.DropTable(
+                name: "LineItems");
+
+            migrationBuilder.DropTable(
                 name: "Payments");
 
             migrationBuilder.DropTable(
@@ -420,9 +476,6 @@ namespace AlejandroElectronics.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Address");
 
             migrationBuilder.DropTable(
@@ -430,6 +483,9 @@ namespace AlejandroElectronics.Migrations
 
             migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

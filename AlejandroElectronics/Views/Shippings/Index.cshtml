@@ -8,7 +8,7 @@
 <h2>Orders &amp; Payments</h2><br /><br />
 
 <h3>Order</h3>
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>
@@ -26,7 +26,7 @@
                 @Model.Cart.Product.Name
             </td>
             <td>
-                @Model.Cart.Product.Price
+                @Model.Cart.Product.Price.Value.ToString("c")
             </td>
         </tr>
 
@@ -35,7 +35,7 @@
 
 <br />
 <br />
-<form method="post">
+<form method="post" asp-validation-summary="All" >
     <div class="row">
         <div class="col-4">
 
@@ -108,8 +108,8 @@
                 </div>
             </div>
 
-            <input type="submit" value="place order" class="btn btn-success" />
-
+            <input type="submit" value="Submmit" class="btn btn-dark" />
+           
         </div>
     </div>
 </form>

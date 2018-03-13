@@ -11,8 +11,8 @@ using System;
 namespace AlejandroElectronics.Migrations
 {
     [DbContext(typeof(AlejandroTestContext))]
-    [Migration("20180228151148_Migration2")]
-    partial class Migration2
+    [Migration("20180313190003_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,8 @@ namespace AlejandroElectronics.Migrations
 
             modelBuilder.Entity("AlejandroElectronics.Models.Address", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("City")
                         .HasMaxLength(450)
@@ -148,7 +149,8 @@ namespace AlejandroElectronics.Migrations
 
             modelBuilder.Entity("AlejandroElectronics.Models.Orders", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("ProductId")
                         .HasColumnName("ProductID");
@@ -166,7 +168,8 @@ namespace AlejandroElectronics.Migrations
 
             modelBuilder.Entity("AlejandroElectronics.Models.Payments", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("OrdersId")
                         .HasColumnName("OrdersID");
@@ -235,21 +238,18 @@ namespace AlejandroElectronics.Migrations
 
             modelBuilder.Entity("AlejandroElectronics.Models.Shipping", b =>
                 {
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("AddressId");
 
                     b.Property<int>("OrdersId");
-
-                    b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
 
                     b.HasIndex("OrdersId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Shipping");
                 });
@@ -428,10 +428,6 @@ namespace AlejandroElectronics.Migrations
                         .WithMany("Shipping")
                         .HasForeignKey("OrdersId")
                         .HasConstraintName("FK_Shipping_OrdersId");
-
-                    b.HasOne("AlejandroElectronics.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

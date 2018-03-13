@@ -34,7 +34,7 @@ namespace AlejandroElectronics.Models
             //this is called Fluent API to controll migrations. This is what is going into the database.
             modelBuilder.Entity<Address>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.City)
                     .HasMaxLength(450)
@@ -74,7 +74,7 @@ namespace AlejandroElectronics.Models
 
             modelBuilder.Entity<Orders>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
@@ -87,7 +87,7 @@ namespace AlejandroElectronics.Models
 
             modelBuilder.Entity<Payments>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.OrdersId).HasColumnName("OrdersID");
 
@@ -119,7 +119,7 @@ namespace AlejandroElectronics.Models
 
             modelBuilder.Entity<Shipping>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.Address)
                     .WithMany(p => p.Shipping)

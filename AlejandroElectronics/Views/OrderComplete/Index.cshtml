@@ -1,0 +1,34 @@
+﻿@model AlejandroElectronics.Models.Orders
+@{
+    ViewData["Title"] = "Index";
+   
+}
+
+<h2>Thank you for your purchase</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Model.Product.Name
+            <td>
+                @Model.Product.Price.Value.ToString("c")
+            </td>
+            
+        </tr>
+
+    </tbody>
+</table>
+
+<p>This was shipped to @Model.Shipping.First().Address.Street</p>

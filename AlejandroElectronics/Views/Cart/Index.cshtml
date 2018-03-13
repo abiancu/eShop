@@ -30,11 +30,11 @@
                 @Model.Product.Name
             </td>
             <td>                
-               <img src="@Model.Product.ImageUrl" alt="@Model.Product.Name" />
+               <img src="@Model.Product.ImageUrl" alt="@Model.Product.Name" width="300"/>
             </td>
             
             <td>
-                @Model.Product.Price
+                @Model.Product.Price.Value.ToString("c")
             </td>
             <td>
               
