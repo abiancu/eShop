@@ -62,7 +62,7 @@ namespace AlejandroElectronics.Controllers
 
         }
 
-        /// this is the step to forgot password
+        /// STEPS TO FORGOT PASSWORD
         /// 
         public IActionResult ForgotPassword()
         {

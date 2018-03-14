@@ -108,7 +108,7 @@ namespace AlejandroElectronics.Controllers
                         _context.Orders.Add(newOrder); // => this adds the newly created order.
                         _context.Cart.Remove(model.Cart); // => once it's added, Remove() will clear out the cart.
                         Response.Cookies.Delete("cartId");// => Delete() will delete the cookie with the cart info.
-                        await _context.SaveChangesAsync(); //=> Question for joe: Why did I not have to use await_context.SaveChanges()?
+                        await _context.SaveChangesAsync(); 
                         return RedirectToAction("Index", "OrderComplete", new { ID = newOrder.Id });
 
                     }

@@ -93,16 +93,7 @@ namespace AlejandroElectronics
                     Description = "Perfect tool to work at home",
                     DateCreated = DateTime.Now
                 });
-
-                context.Products.Add(new Products
-                {
-                    Name = "Mac Pro Desktop",
-                    Price = 1300.76m,
-                    Sku = 1002,
-                    ImageUrl = "",
-                    Description = "No chords, no mess. This machine will do it all.",
-                    DateCreated = DateTime.Now
-                });
+                context.SaveChanges();               
 
                 context.Products.Add(new Products
                 {
@@ -138,6 +129,17 @@ namespace AlejandroElectronics
 
                 });
                 context.SaveChanges();
+            }
+            if (!context.Reviews.Any())
+            {
+                context.Reviews.Add(new Review
+                {
+                    Rating = 2,
+                    Body = "powerful computer",
+                    IsApproved = true,
+                    Product = context.Products.Find()
+                });
+                    
             }
             
         }
