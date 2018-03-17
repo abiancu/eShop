@@ -77,16 +77,18 @@ namespace AlejandroElectronics.Controllers
             if (user != null)
             {
                 string token = await _signInManager.UserManager.GeneratePasswordResetTokenAsync(user);
-
+                token = System.Net.WebUtility.UrlEncode(token);
                 //sending the password reset URL
                 string currentUrl = Request.GetDisplayUrl(); // =>gets an URl for the user
-                Uri uri = new Uri(currentUrl); 
+                           
+                Uri uri = new Uri(currentUrl); // => splits the URL Object into parts
+
                 string resetUrl = uri.GetLeftPart(UriPartial.Authority); 
-                resetUrl += "/account/resetpassword?id=" + token + "&email=" + email;
+                resetUrl += "/login/resetpassword?id=" + token + "&email=" + email; //=> the resetUrl needs to go to the Login controller.
 
                 SendGrid.Helpers.Mail.SendGridMessage message = new SendGrid.Helpers.Mail.SendGridMessage();
                 message.AddTo(email);
-                message.Subject = "Welcome to CompiFuture Electronics"; // => this is the email Subject;
+                message.Subject = "Password Reset"; // => this is the email Subject;
                 message.SetFrom("AlejandroElectronics@compifuture.com"); // => this is where it's comming from ; 
                 message.AddContent("text/plain", resetUrl);
                 message.AddContent("text/html", string.Format("<a href=\"{0}\">{0}</a>", resetUrl));
@@ -95,7 +97,7 @@ namespace AlejandroElectronics.Controllers
             }
 
 
-            return RedirectToAction("ResetSent");
+            return RedirectToAction("Index", "Login");
 
         }
 
@@ -116,7 +118,7 @@ namespace AlejandroElectronics.Controllers
                 var result = await _signInManager.UserManager.ResetPasswordAsync(user, originalToken, password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Login", new { resetSuccessful = true });
+                    return RedirectToAction("Index", "Login", new { resetSuccessful = true } );
                 }
                 else
                 {

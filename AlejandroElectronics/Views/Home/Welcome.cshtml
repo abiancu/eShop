@@ -5,3 +5,16 @@
 
 <h2>Welcome  @User.Identity.Name</h2>
 
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+<a asp-action="Index" asp-controller="Products">
+    <input type="submit" value="Go To Products" href="/Products" class="btn btn-dark" />
+</a>
+}
+
+
+
+

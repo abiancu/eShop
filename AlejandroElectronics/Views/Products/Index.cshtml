@@ -17,6 +17,7 @@
                 <dd>@product.Name</dd>
                 <dt>Description</dt>
                 <dd>@product.Description</dd>
+                <dd>Price</dd>
                 <dd>@(product.Price.HasValue ? product.Price.Value.ToString("c") : "No Price")</dd>
             </dl>
             @if(product.Reviews != null && product.Reviews.Any())

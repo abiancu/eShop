@@ -10,44 +10,47 @@
     <div asp-validation-summary="All" class="alert alert-danger"></div>
 }
 
+
     <form method="post" novalidate asp-action="register" app-controller="Profile">
         @Html.AntiForgeryToken()
-       
-        <div class="form-group row">
-            <label for="inputUsername3" class="col-sm-2 col-form-label">Create Username</label>
-            <div class="col-sm-10">
-         <input type="text" class="form-control" id="inputUsername3" placeholder="username" name="username" required />
+        <div class="col-4">
+            <div class="form-group row">
+                <label for="inputUsername3">Create Username</label>
+
+                <input type="text" class="form-control" id="inputUsername3" placeholder="username" name="username" required />
+
             </div>
-        </div>
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">Create New Email</label>
-            <div class="col-sm-10">
+            <div class="form-group row">
+                <label for="inputEmail3">Create New Email</label>
+
                 <input type="email" class="form-control" id="inputEmail3" placeholder="abc@abc.com" name="email" required />
+
+            </div>
+
+            <div class="form-group row">
+                <label for="inputPassword3">Create Password</label>
+
+                <input type="password" class="form-control" id="inputPassword3" placeholder="password" name="password" required min="5" />
+
             </div>
         </div>
 
-        <div class="form-group row">
-            <label for="inputPassword3" class="col-sm-2 col-form-label">Create Password</label>
-            <div class="col-sm-10">   
-                       <input type="password" class="form-control" id="inputPassword3" placeholder="password" name="password" required min="5" />
-             </div>
-        </div>
+        <button type="submit" class="btn btn-dark">Create Profile</button>
 
-       
-        <button type="submit" class="btn btn-primary">Create Profile</button>
 
-        @section Scripts{
-        <script type="text/javascript">
-            $(document).ready(() => {
-                $('form').submit((event) => {
-                    if (event.target.checkValidity() == false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    $(event.target).addClass('was-validated');
-                })
-            });
 
-        </script>
-        }
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(() => {
+            $('form').submit((event) => {
+                if (event.target.checkValidity() == false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                $(event.target).addClass('was-validated');
+            })
+        });
+
+    </script>
+}
     </form>
