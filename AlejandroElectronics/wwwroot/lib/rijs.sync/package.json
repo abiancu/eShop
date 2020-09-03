@@ -20,7 +20,7 @@
   "browser": "client",
   "license": "pemrouz.mit-license.org",
   "devDependencies": {
-    "puppeteer": "^0.12.0",
+    "puppeteer": "^5.2.1",
     "rijs": "^0.8.2",
     "rijs.components": "*",
     "rijs.core": "*",
