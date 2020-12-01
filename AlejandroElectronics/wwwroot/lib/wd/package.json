@@ -62,7 +62,7 @@
     "gulp": "3.9.1",
     "gulp-jshint": "2.0.1",
     "hbs": "4.0.1",
-    "http-proxy": "1.15.1",
+    "http-proxy": "1.18.1",
     "imageinfo": "1.0.4",
     "istanbul": "0.4.5",
     "jshint": "2.9.3",
