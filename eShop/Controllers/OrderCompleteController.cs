@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using AlejandroElectronics.Models;
+using eShop.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace AlejandroElectronics.Controllers
+namespace eShop.Controllers
 {
 
     public class OrderCompleteController : Controller

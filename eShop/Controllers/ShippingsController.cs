@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using AlejandroElectronics.Models;
+using eShop.Models;
 
 
 
-namespace AlejandroElectronics.Controllers
+namespace eShop.Controllers
 {
     public class ShippingsController : Controller
     {
