@@ -73,7 +73,7 @@ namespace AlejandroElectronics.Models
                         SendGrid.Helpers.Mail.SendGridMessage message = new SendGrid.Helpers.Mail.SendGridMessage();
                         message.AddTo(email);
                         message.Subject = "Welcome to CompiFuture Electronics";
-                        message.SetFrom("AlejandroElectronics@compifuture.com");
+                        message.SetFrom("alejandro.dev@alstore.com");
                         message.AddContent("text/plain", "Thank you for registering  " + username + " on CompiFuture!");
                         _sendGridClient.SendEmailAsync(message);
 
