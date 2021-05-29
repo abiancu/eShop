@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 
 
-namespace AlejandroElectronics.Models
+namespace eShop.Models
 {
     public class ProfileViewModel
     {

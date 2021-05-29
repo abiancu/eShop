@@ -9,9 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using AlejandroElectronics.Models;
+using eShop.Models;
 
-namespace AlejandroElectronics
+namespace eShop
 {
     public class Startup
     {

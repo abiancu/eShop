@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http.Extensions;
 using SendGrid;
 
-namespace AlejandroElectronics.Controllers
+namespace eShop.Controllers
 {
 
 

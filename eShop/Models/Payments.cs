@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AlejandroElectronics.Models
+namespace eShop.Models
 {
     public partial class Payments
     {

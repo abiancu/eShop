@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace AlejandroElectronics.Models
+namespace eShop.Models
 {
     public partial class Products
     {

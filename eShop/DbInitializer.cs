@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using AlejandroElectronics.Models;
+using eShop.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace AlejandroElectronics
+namespace eShop
 {
     internal class DbInitializer
     {
