@@ -43,7 +43,8 @@ namespace AlejandroElectronics
             // SERVICE TO READ THE secretAPI key
             services.AddTransient<SendGrid.SendGridClient>((x) =>
             {
-                return new SendGrid.SendGridClient(Configuration["myKey"]);
+                return new SendGrid.SendGridClient(Configuration["Sengrid:SGKEY"]);
+
             });
 
             
@@ -53,12 +54,12 @@ namespace AlejandroElectronics
             services.AddTransient<Braintree.BraintreeGateway>((x) =>
             {
                 return new Braintree.BraintreeGateway(
-                    Configuration["braintree.environment"],
-                    Configuration["braintree.merchantid"],
-                    Configuration["braintree.publickey"],
-                    Configuration["braintree.privatekey"]
+                    Configuration["braintree:environment"],
+                    Configuration["braintree:merchantid"],
+                    Configuration["braintree:publickey"],
+                    Configuration["braintree:privatekey"]
                 );
-                   
+                
             });
 
             // Adding Transient service for SMARTYSTREETS

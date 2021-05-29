@@ -89,7 +89,7 @@ namespace AlejandroElectronics.Controllers
                 SendGrid.Helpers.Mail.SendGridMessage message = new SendGrid.Helpers.Mail.SendGridMessage();
                 message.AddTo(email);
                 message.Subject = "Password Reset"; // => this is the email Subject;
-                message.SetFrom("AlejandroElectronics@compifuture.com"); // => this is where it's comming from ; 
+                message.SetFrom("alejandro.dev@alstore.com"); // => this is where it's comming from ; 
                 message.AddContent("text/plain", resetUrl);
                 message.AddContent("text/html", string.Format("<a href=\"{0}\">{0}</a>", resetUrl));
                 await _sendGridClient.SendEmailAsync(message);
