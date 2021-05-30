@@ -11,11 +11,11 @@ namespace eShop.Controllers
 
     public class OrderCompleteController : Controller
     {
-        public OrderCompleteController(AlejandroTestContext context)
+        public OrderCompleteController(eShopTestContext context)
         {
             _context = context;
         }
-        private AlejandroTestContext _context; 
+        private eShopTestContext _context; 
        
        
         public async Task<IActionResult> Index(int id)

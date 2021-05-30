@@ -10,7 +10,7 @@ using System;
 
 namespace eShop.Migrations
 {
-    [DbContext(typeof(AlejandroTestContext))]
+    [DbContext(typeof(eShopTestContext))]
     partial class AlejandroTestContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

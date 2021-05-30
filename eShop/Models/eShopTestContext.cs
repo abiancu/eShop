@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace eShop.Models
 {
-    public partial class AlejandroTestContext : Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext<ApplicationUser>
+    public partial class eShopTestContext : Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext<ApplicationUser>
     {
 
-        public AlejandroTestContext(): base()
+        public eShopTestContext(): base()
         {
         }
 
-        public AlejandroTestContext(DbContextOptions options) : base(options)
+        public eShopTestContext(DbContextOptions options) : base(options)
         {
         } 
 

@@ -11,10 +11,10 @@ namespace eShop.Controllers
 {
     public class ProductsController : Controller
     {
-        private AlejandroTestContext _context;
+        private eShopTestContext _context;
         
 
-        public ProductsController(AlejandroTestContext context)
+        public ProductsController(eShopTestContext context)
         {
             _context = context;
             

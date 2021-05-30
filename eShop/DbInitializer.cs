@@ -7,7 +7,7 @@ namespace eShop
 {
     internal class DbInitializer
     {
-        internal static void Initialize(AlejandroTestContext context) //-- this Initialize is coming from Startup.cs
+        internal static void Initialize(eShopTestContext context) //-- this Initialize is coming from Startup.cs
         {
             // tHIS CREATES THE DATABASE
             context.Database.Migrate();

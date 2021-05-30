@@ -11,10 +11,10 @@ namespace eShop.Controllers
 {
     public class CartController : Controller
     {
-        private AlejandroTestContext _context; // changed from"private readonly Alejandro..., to: "private AlejandroTestContext"
+        private eShopTestContext _context; // changed from"private readonly eShop..., to: "private eShopTestContext"
        
 
-        public CartController(AlejandroTestContext context)
+        public CartController(eShopTestContext context)
         {
             _context = context;
         }

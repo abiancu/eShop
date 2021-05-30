@@ -13,13 +13,13 @@ namespace eShop.Controllers
 {
     public class ShippingsController : Controller
     {
-        private readonly AlejandroTestContext _context;
+        private readonly eShopTestContext _context;
 
         private Braintree.BraintreeGateway _braintreeGateway; // => injecting braintree
 
         private SmartyStreets.USStreetApi.Client _usStreetClient; // => injecting SmartyStreets
 
-        public ShippingsController(AlejandroTestContext context, Braintree.BraintreeGateway braintreeGateway, SmartyStreets.USStreetApi.Client usStreetClient)
+        public ShippingsController(eShopTestContext context, Braintree.BraintreeGateway braintreeGateway, SmartyStreets.USStreetApi.Client usStreetClient)
         {
             _context = context;
             _braintreeGateway = braintreeGateway;
