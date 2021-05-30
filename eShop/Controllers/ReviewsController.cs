@@ -11,9 +11,9 @@ namespace eShop.Controllers
 {
     public class ReviewsController : Controller
     {
-        private readonly AlejandroTestContext _context;
+        private readonly eShopTestContext _context;
 
-        public ReviewsController(AlejandroTestContext context)
+        public ReviewsController(eShopTestContext context)
         {
             _context = context;
         }

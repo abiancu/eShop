@@ -10,7 +10,7 @@ using System;
 
 namespace eShop.Migrations
 {
-    [DbContext(typeof(AlejandroTestContext))]
+    [DbContext(typeof(eShopTestContext))]
     [Migration("20180313190003_Initial")]
     partial class Initial
     {

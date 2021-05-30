@@ -27,14 +27,14 @@ namespace eShop
         {
             services.AddSession();
             services.AddMvc();
-            services.AddDbContext<AlejandroTestContext>(opt =>
+            services.AddDbContext<eShopTestContext>(opt =>
             opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
             sqlOptions => sqlOptions.MigrationsAssembly(this.GetType().Assembly.FullName)));
             //UseInMemoryDatabase("Identities"));
 
             services.AddAntiforgery(); //for security!
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<AlejandroTestContext>()
+                .AddEntityFrameworkStores<eShopTestContext>()
                 .AddDefaultTokenProviders(); 
 
             //setting up connectioString
@@ -74,7 +74,7 @@ namespace eShop
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, AlejandroTestContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, eShopTestContext context)
          {
            
             if (env.IsDevelopment())
